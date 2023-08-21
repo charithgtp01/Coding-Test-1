@@ -2,6 +2,7 @@ package lnbti.charithgtp01.codetest1.ui.contacts
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import lnbti.charithgtp01.codetest1.R
@@ -10,9 +11,10 @@ import lnbti.charithgtp01.codetest1.model.Contact
 
 class MainActivity : ComponentActivity() {
 
-    private var binding: ActivityMainBinding? = null
+    private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: ContactsListViewModel
     private lateinit var contactsListAdapter: ContactsListAdapter
+    private lateinit var allContactsList:List<Contact>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +23,7 @@ class MainActivity : ComponentActivity() {
         binding?.vm = viewModel
         binding?.lifecycleOwner = this
 
+        getUsersList()
         initiateAdapter()
         viewModelObservers()
 
@@ -32,13 +35,7 @@ class MainActivity : ComponentActivity() {
     private fun initiateAdapter() {
         /* Initiate Adapter */
         contactsListAdapter =
-            ContactsListAdapter(object : ContactsListAdapter.OnItemClickListener {
-                override fun itemClick(item: Contact) {
-                    when (item.name) {
-
-                    }
-                }
-            })
+            ContactsListAdapter(allContactsList)
 
         /* Set Adapter to Recycle View */
         binding?.recyclerView.also { it2 ->
@@ -56,6 +53,73 @@ class MainActivity : ComponentActivity() {
         viewModel.contactsList.observe(this) {
             contactsListAdapter.submitList(it)
         }
+    }
+
+
+    /**
+     * Get Server Response and Set values to live data
+     */
+    private fun getUsersList() {
+        allContactsList = listOf(
+            Contact(
+                1,
+                "Charith Vinodya",
+                "charithvin@gmail.com",
+                "0712919248",
+                "",
+                "Bandarawatta, Gampaha"
+            ),
+            Contact(
+                2,
+                "Charith Vinodya",
+                "charithvin@gmail.com",
+                "0712919248",
+                "",
+                "Bandarawatta, Gampaha"
+            ),
+            Contact(
+                3,
+                "Charith Vinodya",
+                "charithvin@gmail.com",
+                "0712919248",
+                "",
+                "Bandarawatta, Gampaha"
+            ),
+            Contact(
+                4,
+                "Charith Vinodya",
+                "charithvin@gmail.com",
+                "0712919248",
+                "",
+                "Bandarawatta, Gampaha"
+            ),
+            Contact(
+                5,
+                "Charith Vinodya",
+                "charithvin@gmail.com",
+                "0712919248",
+                "",
+                "Bandarawatta, Gampaha"
+            ),
+            Contact(
+                6,
+                "Charith Vinodya",
+                "charithvin@gmail.com",
+                "0712919248",
+                "",
+                "Bandarawatta, Gampaha"
+            ),
+            Contact(
+                7,
+                "Charith Vinodya",
+                "charithvin@gmail.com",
+                "0712919248",
+                "",
+                "Bandarawatta, Gampaha"
+            ),
+        )
+
+        viewModel.setUsersList(allContactsList)
     }
 
 }
