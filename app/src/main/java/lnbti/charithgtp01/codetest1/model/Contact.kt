@@ -14,6 +14,7 @@ data class Contact(
     val contactNo:String,
     val avatar: String,
     val address:String,
+    var isExpanded: Boolean = false
 ) : Parcelable {
 
 
