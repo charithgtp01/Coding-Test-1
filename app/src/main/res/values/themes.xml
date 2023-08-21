@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.CodeTest1" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.CodeTest1" parent="Theme.MaterialComponents.DayNight" />
+
+    //Rounded User Image Style
+    <style name="roundedImageViewRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

@@ -3,14 +3,12 @@ package lnbti.charithgtp01.codetest1.ui.contacts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 import lnbti.charithgtp01.codetest1.model.Contact
 
 /**
  * Contacts Page View Model
  */
-class ContactsViewModel : ViewModel() {
+class ContactsListViewModel : ViewModel() {
 
     private val _contactsList = MutableLiveData<List<Contact>>()
     val contactsList: LiveData<List<Contact>> get() = _contactsList
