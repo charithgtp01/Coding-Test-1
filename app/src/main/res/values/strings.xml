@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CodeTest1</string>
+    <string name="search_input_text_hint">Search here</string>
 </resources>

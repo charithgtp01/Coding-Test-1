@@ -16,4 +16,10 @@
     <dimen name="buttonRadius">30dp</dimen>
     <dimen name="content_mini_margin">8dp</dimen>
     <dimen name="button_horizontal_margin">45dp</dimen>
+
+    /* Search View Dimensions */
+    <dimen name="search_view_margin">12dp</dimen>
+    <dimen name="search_view_corner_radius">30dp</dimen>
+    <dimen name="search_view_card_elevation">8dp</dimen>
+    <dimen name="search_view_text_size">12sp</dimen>
 </resources>
