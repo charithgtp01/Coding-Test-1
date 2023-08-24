@@ -7,6 +7,7 @@
     <dimen name="round_icon_stroke_width">0.5dp</dimen>
     <dimen name="button_margin_top">16dp</dimen>
     <dimen name="action_button_size">60dp</dimen>
+    <dimen name="button_margin">16dp</dimen>
 
     /* Card Views Dimensions */
     <dimen name="content_card_view_corner_radius">20dp</dimen>

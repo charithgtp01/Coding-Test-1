@@ -6,11 +6,16 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.util.Util
+import dagger.hilt.android.AndroidEntryPoint
 import lnbti.charithgtp01.codetest1.ContactDatabase
 import lnbti.charithgtp01.codetest1.R
 import lnbti.charithgtp01.codetest1.databinding.ActivityMainBinding
 import lnbti.charithgtp01.codetest1.model.Contact
+import lnbti.charithgtp01.codetest1.ui.newcontact.NewContactActivity
+import lnbti.charithgtp01.codetest1.utils.Utils
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -21,12 +26,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        val contactDao = ContactDatabase.getInstance(this).contactDao()
 
-        val repository = ContactRepository(contactDao)
-
-        val viewModelFactory = ContactViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory)[ContactsListViewModel::class.java]
+        viewModel = ViewModelProvider(this)[ContactsListViewModel::class.java]
 
 //        val contact = Contact(1, "John Doe", "john@example.com", "1234567890", "avatar.jpg", "123 Main St", false)
 //        viewModel.insertContact(contact)
@@ -35,8 +36,15 @@ class MainActivity : ComponentActivity() {
         binding.lifecycleOwner = this
         viewModel.getContacts()
 
+        initView()
         viewModelObservers()
 
+    }
+
+    private fun initView() {
+        binding.floatingActionButton.setOnClickListener {
+            Utils.navigateToAnotherActivity(this@MainActivity, NewContactActivity::class.java)
+        }
     }
 
     /**

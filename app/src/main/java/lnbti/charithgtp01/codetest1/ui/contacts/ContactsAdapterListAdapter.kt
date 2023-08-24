@@ -15,11 +15,12 @@ import lnbti.charithgtp01.codetest1.Constant
 import lnbti.charithgtp01.codetest1.databinding.CollapsedLayoutContactListBinding
 import lnbti.charithgtp01.codetest1.databinding.ExpandedLayoutContactListBinding
 import lnbti.charithgtp01.codetest1.model.Contact
+import javax.inject.Inject
 
 /**
  * Contacts List Adapter
  */
-class ContactsListAdapter constructor(private val dataList: List<Contact>) :
+class ContactsListAdapter @Inject constructor(private val dataList: List<Contact>) :
     ListAdapter<Contact, ContactsListAdapter.ContactsAdapterListViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(

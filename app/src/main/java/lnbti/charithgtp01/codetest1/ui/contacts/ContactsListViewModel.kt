@@ -4,14 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import lnbti.charithgtp01.codetest1.ContactDatabase
 import lnbti.charithgtp01.codetest1.model.Contact
+import javax.inject.Inject
 
 /**
  * Contacts Page View Model
  */
-class ContactsListViewModel(private val repository: ContactRepository) : ViewModel() {
+@HiltViewModel
+class ContactsListViewModel @Inject constructor(private val repository: ContactRepository) : ViewModel() {
 
     private val _contactsList = MutableLiveData<List<Contact>>()
     val contactsList: LiveData<List<Contact>> get() = _contactsList
@@ -22,23 +25,13 @@ class ContactsListViewModel(private val repository: ContactRepository) : ViewMod
     }
 
     /**
-     * Get Server Response and Set values to live data
-     */
-    fun setUsersList(list: List<Contact>) {
-        allUsersList = list
-        _contactsList.value = list
-    }
-
-    /**
      * @param searchString Search View entered value
      * @return Data list filtered by user's full name
      */
     private fun filterList(searchString: String): List<Contact>? {
         // to get the result as list
         return allUsersList?.filter { s ->
-            (s.name.lowercase()).contains(
-                searchString.lowercase()
-            )
+            s.name?.contains(searchString) == true
         }
     }
 

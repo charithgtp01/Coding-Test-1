@@ -16,4 +16,19 @@
         <item name="hintEnabled">false</item>
         <item name="boxBackgroundMode">none</item>
     </style>
+
+    //Action Bar Title Style
+
+    <style name="action_bar_title_text_style" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">bold</item>
+    </style>
+
+
+    <style name="Theme.CodeTest1.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 </resources>
