@@ -1,21 +1,18 @@
 package lnbti.charithgtp01.codetest1.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 /**
  * Data class for Contact Object
  */
-@Parcelize
+@Entity(tableName = "contact_table")
 data class Contact(
-    val id: Int,
-    val name: String,
-    val email: String,
-    val contactNo:String,
-    val avatar: String,
-    val address:String,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0, // Default value is 0, and Room will automatically assign a unique value
+    val name: String?,
+    val email: String?,
+    val contactNo: String?,
+    val address: String?,
     var isExpanded: Boolean = false
-) : Parcelable {
-
-
-}
+)
