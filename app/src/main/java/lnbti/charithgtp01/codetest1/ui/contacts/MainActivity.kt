@@ -12,6 +12,7 @@ import lnbti.charithgtp01.codetest1.ContactDatabase
 import lnbti.charithgtp01.codetest1.R
 import lnbti.charithgtp01.codetest1.databinding.ActivityMainBinding
 import lnbti.charithgtp01.codetest1.model.Contact
+import lnbti.charithgtp01.codetest1.model.ContactItem
 import lnbti.charithgtp01.codetest1.ui.newcontact.NewContactActivity
 import lnbti.charithgtp01.codetest1.utils.Utils
 
@@ -55,10 +56,21 @@ class MainActivity : ComponentActivity() {
       * Update Recycle View Items using Diff Utils
       */
         viewModel.contactsList.observe(this) {
+
+            val profileItemList = it.map { item ->
+                ContactItem(
+                    item.id,
+                    item.name,
+                    item.email,
+                    item.contactNo,
+                    item.address,
+                    item.isExpanded
+                )
+            }
             /* Initiate Adapter */
             contactsListAdapter =
-                ContactsListAdapter(it)
-            contactsListAdapter.submitList(it)
+                ContactsListAdapter(profileItemList)
+            contactsListAdapter.submitList(profileItemList)
             /* Set Adapter to Recycle View */
             binding?.recyclerView.also { it2 ->
                 it2?.adapter = contactsListAdapter
