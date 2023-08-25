@@ -1,11 +1,9 @@
 package lnbti.charithgtp01.codetest1.ui.contacts
 
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.BindingAdapter
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
+import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -15,13 +13,14 @@ import lnbti.charithgtp01.codetest1.Constant
 import lnbti.charithgtp01.codetest1.databinding.CollapsedLayoutContactListBinding
 import lnbti.charithgtp01.codetest1.databinding.ExpandedLayoutContactListBinding
 import lnbti.charithgtp01.codetest1.model.Contact
+import lnbti.charithgtp01.codetest1.model.ContactItem
 import javax.inject.Inject
 
 /**
  * Contacts List Adapter
  */
-class ContactsListAdapter @Inject constructor(private val dataList: List<Contact>) :
-    ListAdapter<Contact, ContactsListAdapter.ContactsAdapterListViewHolder>(diffUtil) {
+class ContactsListAdapter @Inject constructor(private val dataList: List<ContactItem>) :
+    ListAdapter<ContactItem, ContactsListAdapter.ContactsAdapterListViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -41,7 +40,8 @@ class ContactsListAdapter @Inject constructor(private val dataList: List<Contact
             getItem(position).isExpanded = !getItem(position).isExpanded
             notifyDataSetChanged()
         }
-        holder.bind(getItem(position))
+        val contact = getItem(position)
+        holder.bind(contact)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -50,8 +50,8 @@ class ContactsListAdapter @Inject constructor(private val dataList: List<Contact
 
     inner class ContactsAdapterListViewHolder(val binding: ViewDataBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Contact) {
-            binding.setVariable(BR.item,item)
+        fun bind(item: ContactItem) {
+            binding.setVariable(BR.item, item)
             binding.executePendingBindings()
         }
     }
@@ -60,12 +60,12 @@ class ContactsListAdapter @Inject constructor(private val dataList: List<Contact
 /**
  * Diff Util Interface
  */
-val diffUtil = object : DiffUtil.ItemCallback<Contact>() {
-    override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
+val diffUtil = object : DiffUtil.ItemCallback<ContactItem>() {
+    override fun areItemsTheSame(oldItem: ContactItem, newItem: ContactItem): Boolean {
         return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
+    override fun areContentsTheSame(oldItem: ContactItem, newItem: ContactItem): Boolean {
         return oldItem == newItem
     }
 }
