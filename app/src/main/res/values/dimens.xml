@@ -23,4 +23,7 @@
     <dimen name="search_view_corner_radius">30dp</dimen>
     <dimen name="search_view_card_elevation">8dp</dimen>
     <dimen name="search_view_text_size">12sp</dimen>
+    <dimen name="rounded_corner_radius">50dp</dimen>
+    <dimen name="contact_letter_text_size">26sp</dimen>
+    <dimen name="contact_bg_size">50sp</dimen>
 </resources>
