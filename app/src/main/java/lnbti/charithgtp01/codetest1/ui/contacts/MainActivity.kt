@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import lnbti.charithgtp01.codetest1.R
@@ -19,20 +20,13 @@ class MainActivity : ComponentActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: ContactsListViewModel
     private lateinit var contactsListAdapter: ContactsListAdapter
-//    private lateinit var allContactsList: List<Contact>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
         viewModel = ViewModelProvider(this)[ContactsListViewModel::class.java]
-
-//        val contact = Contact(1, "John Doe", "john@example.com", "1234567890", "avatar.jpg", "123 Main St", false)
-//        viewModel.insertContact(contact)
-
         binding.vm = viewModel
         binding.lifecycleOwner = this
-        viewModel.getContacts()
 
         initView()
         viewModelObservers()
@@ -52,7 +46,7 @@ class MainActivity : ComponentActivity() {
         /* Observer to catch list data
       * Update Recycle View Items using Diff Utils
       */
-        viewModel.contactsList.observe(this) {
+        viewModel.allContacts.observe(this) {
 
             val profileItemList = it.map { item ->
                 ContactItem(
@@ -72,7 +66,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     override fun onDeleteContactClick(contact: ContactItem) {
-                        Toast.makeText(this@MainActivity, contact.name, Toast.LENGTH_SHORT).show()
+                      viewModel.deleteContact(contact.id)
                     }
                 })
             contactsListAdapter.submitList(profileItemList)
@@ -81,76 +75,21 @@ class MainActivity : ComponentActivity() {
                 it2?.adapter = contactsListAdapter
             }
         }
+
+        viewModel.filteredContacts.observe(this, Observer { it ->
+
+            val filteredContacts = it.map { item ->
+                ContactItem(
+                    item.id,
+                    item.name,
+                    item.email,
+                    item.contactNo,
+                    item.address,
+                    item.isExpanded
+                )
+            }
+            contactsListAdapter.updateList(filteredContacts)
+        })
     }
-
-
-    /**
-     * Get Server Response and Set values to live data
-     */
-    private suspend fun getUsersList() {
-
-
-//        allContactsList = listOf(
-//            Contact(
-//                1,
-//                "Charith Vinodya",
-//                "charithvin@gmail.com",
-//                "0712919248",
-//                "",
-//                "Bandarawatta, Gampaha"
-//            ),
-//            Contact(
-//                2,
-//                "Charith Vinodya",
-//                "charithvin@gmail.com",
-//                "0712919248",
-//                "",
-//                "Bandarawatta, Gampaha"
-//            ),
-//            Contact(
-//                3,
-//                "Charith Vinodya",
-//                "charithvin@gmail.com",
-//                "0712919248",
-//                "",
-//                "Bandarawatta, Gampaha"
-//            ),
-//            Contact(
-//                4,
-//                "Charith Vinodya",
-//                "charithvin@gmail.com",
-//                "0712919248",
-//                "",
-//                "Bandarawatta, Gampaha"
-//            ),
-//            Contact(
-//                5,
-//                "Charith Vinodya",
-//                "charithvin@gmail.com",
-//                "0712919248",
-//                "",
-//                "Bandarawatta, Gampaha"
-//            ),
-//            Contact(
-//                6,
-//                "Charith Vinodya",
-//                "charithvin@gmail.com",
-//                "0712919248",
-//                "",
-//                "Bandarawatta, Gampaha"
-//            ),
-//            Contact(
-//                7,
-//                "Charith Vinodya",
-//                "charithvin@gmail.com",
-//                "0712919248",
-//                "",
-//                "Bandarawatta, Gampaha"
-//            ),
-//        )
-
-//        viewModel.setUsersList(allContactsList)
-    }
-
 }
 

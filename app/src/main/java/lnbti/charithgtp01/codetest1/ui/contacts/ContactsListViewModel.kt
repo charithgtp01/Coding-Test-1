@@ -8,17 +8,21 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import lnbti.charithgtp01.codetest1.model.Contact
 import lnbti.charithgtp01.codetest1.repositories.ContactRepository
+import lnbti.charithgtp01.codetest1.ui.newcontact.NewContactFormState
 import javax.inject.Inject
 
 /**
  * Contacts Page View Model
  */
 @HiltViewModel
-class ContactsListViewModel @Inject constructor(private val repository: ContactRepository) : ViewModel() {
+class ContactsListViewModel @Inject constructor(private val repository: ContactRepository) :
+    ViewModel() {
 
-    private val _contactsList = MutableLiveData<List<Contact>>()
-    val contactsList: LiveData<List<Contact>> get() = _contactsList
-    lateinit var allUsersList: List<Contact>
+    val allContacts: LiveData<List<Contact>> = repository.allContacts
+
+    // LiveData for filtered contacts
+    private val _filteredContacts = MutableLiveData<List<Contact>>()
+    val filteredContacts: LiveData<List<Contact>> = _filteredContacts
 
     init {
 
@@ -30,22 +34,24 @@ class ContactsListViewModel @Inject constructor(private val repository: ContactR
      */
     private fun filterList(searchString: String): List<Contact>? {
         // to get the result as list
-        return allUsersList?.filter { s ->
+        return allContacts.value?.filter { s ->
             s.name?.contains(searchString) == true
         }
     }
 
     /**
-     * Search View on text change listener
+     * Function to update filteredContacts based on search query
      * @param searchString Entering value
      */
-    fun onSearchViewTextChanged(searchString: CharSequence?) {
+    fun onSearchViewTextChanged(searchString: CharSequence) {
         val value = searchString.toString()
         if (value.isNullOrBlank()) {
-            _contactsList.value = allUsersList
+//            _contactsList.value = allContacts.value
         } else {
-            _contactsList.value = filterList(value)
+//            _contactsList.value = filterList(value)
         }
+
+        _filteredContacts.value = allContacts.value?.filter { it.name.contains(searchString, true) }
     }
 
     fun insertContact(contact: Contact) {
@@ -60,17 +66,9 @@ class ContactsListViewModel @Inject constructor(private val repository: ContactR
         }
     }
 
-    fun deleteContact(contact: Contact) {
+    fun deleteContact(id: Int) {
         viewModelScope.launch {
-            repository.deleteContact(contact)
+            repository.deleteContact(id)
         }
     }
-
-    fun getContacts() {
-        viewModelScope.launch {
-            allUsersList = repository.getAllContacts()
-            _contactsList.value = allUsersList
-        }
-    }
-
 }

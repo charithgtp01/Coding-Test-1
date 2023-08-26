@@ -15,12 +15,12 @@ import java.util.Locale
 object BindingAdapters {
     @BindingAdapter("circularBg")
     @JvmStatic
-    fun setCircularBg(view: TextView, profile: ContactItem) {
-        view.text = profile.initialLetter
+    fun setCircularBg(view: TextView, profile: ContactItem?) {
+        view.text = profile?.initialLetter
         //Set text color according to the first letter
-        view.setTextColor(Color.parseColor(getTextColor(profile.initialLetter)))
+        view.setTextColor(Color.parseColor(getTextColor(profile?.initialLetter)))
         val cornerRadius = view.context.resources.getDimension(R.dimen.rounded_corner_radius)
-        val color = Color.parseColor(getBgColor(profile.initialLetter))
+        val color = Color.parseColor(getBgColor(profile?.initialLetter))
         val roundedDrawable = createRoundedDrawable(cornerRadius, color)
         view.background = roundedDrawable
     }
@@ -38,9 +38,9 @@ object BindingAdapters {
     /**
      * Return Hex Color code of text color according to the first letter of the name
      */
-    private fun getTextColor(firstLetter: String): String {
+    private fun getTextColor(firstLetter: String?): String {
         var colorCode: String
-        when (firstLetter.uppercase(Locale.getDefault())) {
+        when (firstLetter?.uppercase(Locale.getDefault())) {
             "A" -> colorCode = "#FFFF0000"
             "B" -> colorCode = "#FF9000FF"
             "C" -> colorCode = "#FF0025FF"
@@ -75,9 +75,9 @@ object BindingAdapters {
     /**
      * Return Hex Color code bg color according to the first letter of the name
      */
-    private fun getBgColor(firstLetter: String): String {
+    private fun getBgColor(firstLetter: String?): String {
         var colorCode: String
-        when (firstLetter.uppercase(Locale.getDefault())) {
+        when (firstLetter?.uppercase(Locale.getDefault())) {
             "A" -> colorCode = "#32FF0000"
             "B" -> colorCode = "#329000FF"
             "C" -> colorCode = "#320025FF"
