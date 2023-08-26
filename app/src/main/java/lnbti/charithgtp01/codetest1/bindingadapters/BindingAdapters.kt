@@ -1,13 +1,11 @@
-package lnbti.charithgtp01.codetest1
+package lnbti.charithgtp01.codetest1.bindingadapters
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
-import android.view.View
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources.getColorStateList
-import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import lnbti.charithgtp01.codetest1.R
 import lnbti.charithgtp01.codetest1.model.ContactItem
 import java.util.Locale
 
@@ -17,12 +15,12 @@ import java.util.Locale
 object BindingAdapters {
     @BindingAdapter("circularBg")
     @JvmStatic
-    fun setCircularBg(view: TextView, profile: ContactItem) {
-        view.text = profile.initialLetter
+    fun setCircularBg(view: TextView, profile: ContactItem?) {
+        view.text = profile?.initialLetter
         //Set text color according to the first letter
-        view.setTextColor(Color.parseColor(getTextColor(profile.initialLetter)))
+        view.setTextColor(Color.parseColor(getTextColor(profile?.initialLetter)))
         val cornerRadius = view.context.resources.getDimension(R.dimen.rounded_corner_radius)
-        val color = Color.parseColor(getBgColor(profile.initialLetter))
+        val color = Color.parseColor(getBgColor(profile?.initialLetter))
         val roundedDrawable = createRoundedDrawable(cornerRadius, color)
         view.background = roundedDrawable
     }
@@ -40,9 +38,9 @@ object BindingAdapters {
     /**
      * Return Hex Color code of text color according to the first letter of the name
      */
-    private fun getTextColor(firstLetter: String): String {
+    private fun getTextColor(firstLetter: String?): String {
         var colorCode: String
-        when (firstLetter.uppercase(Locale.getDefault())) {
+        when (firstLetter?.uppercase(Locale.getDefault())) {
             "A" -> colorCode = "#FFFF0000"
             "B" -> colorCode = "#FF9000FF"
             "C" -> colorCode = "#FF0025FF"
@@ -77,9 +75,9 @@ object BindingAdapters {
     /**
      * Return Hex Color code bg color according to the first letter of the name
      */
-    private fun getBgColor(firstLetter: String): String {
+    private fun getBgColor(firstLetter: String?): String {
         var colorCode: String
-        when (firstLetter.uppercase(Locale.getDefault())) {
+        when (firstLetter?.uppercase(Locale.getDefault())) {
             "A" -> colorCode = "#32FF0000"
             "B" -> colorCode = "#329000FF"
             "C" -> colorCode = "#320025FF"

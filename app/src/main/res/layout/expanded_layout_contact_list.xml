@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
+        <variable
+            name="callbacks"
+            type="lnbti.charithgtp01.codetest1.interfaces.ContactsCallback" />
+
         <variable
             name="item"
             type="lnbti.charithgtp01.codetest1.model.ContactItem" />
     </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,13 +46,12 @@
 
             <TextView
                 android:id="@+id/nameView"
+                style="@style/list_item_content_text_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="8dp"
                 android:text="@{item.name}"
-                android:textColor="@color/black"
-                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/clientLetter"
                 app:layout_constraintEnd_toStartOf="@+id/forwardArrowIcon"
                 app:layout_constraintStart_toEndOf="@+id/guideline"
@@ -72,41 +78,61 @@
 
             <TextView
                 android:id="@+id/email"
+                style="@style/list_item_sub_content_text_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="8dp"
-                android:textColor="@color/black"
-                android:textSize="12sp"
                 android:text="@{item.email}"
-                app:layout_constraintTop_toBottomOf="@id/contact"
-                app:layout_constraintStart_toStartOf="@id/clientLetter"/>
+                app:layout_constraintStart_toStartOf="@id/clientLetter"
+                app:layout_constraintTop_toBottomOf="@id/contact" />
 
 
             <TextView
                 android:id="@+id/address"
+                style="@style/list_item_sub_content_text_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="8dp"
-                android:textColor="@color/black"
-                android:textSize="12sp"
                 android:text="@{item.address}"
-                app:layout_constraintTop_toBottomOf="@id/email"
-                app:layout_constraintStart_toStartOf="@id/clientLetter"       />
+                app:layout_constraintStart_toStartOf="@id/clientLetter"
+                app:layout_constraintTop_toBottomOf="@id/email" />
 
 
             <TextView
                 android:id="@+id/contact"
+                style="@style/list_item_sub_content_text_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="8dp"
-                android:textColor="@color/black"
-                android:textSize="12sp"
                 android:text="@{item.contactNo}"
-                app:layout_constraintTop_toBottomOf="@id/clientLetter"
-                app:layout_constraintStart_toStartOf="@id/clientLetter"/>
+                app:layout_constraintStart_toStartOf="@id/clientLetter"
+                app:layout_constraintTop_toBottomOf="@id/clientLetter" />
+
+            <!-- Edit button -->
+            <ImageView
+                android:id="@+id/editBtn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:onClick="@{() -> callbacks.onEditContactClick(item)}"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/pencil"
+                app:layout_constraintEnd_toEndOf="@id/forwardArrowIcon"
+                app:layout_constraintStart_toStartOf="@+id/forwardArrowIcon"
+                app:layout_constraintTop_toTopOf="@id/contact" />
+
+            <!-- Delete button -->
+            <ImageView
+                android:id="@+id/deleteBtn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/bin"
+                app:layout_constraintBottom_toBottomOf="@id/address"
+                app:layout_constraintEnd_toEndOf="@id/editBtn"
+                app:onClick="@{() -> callbacks.onDeleteContactClick(item)}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
