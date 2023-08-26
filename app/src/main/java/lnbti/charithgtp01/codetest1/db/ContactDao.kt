@@ -1,5 +1,6 @@
-package lnbti.charithgtp01.codetest1
+package lnbti.charithgtp01.codetest1.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -13,13 +14,13 @@ interface ContactDao {
     suspend fun insertContact(user: Contact): Long
 
     @Query("SELECT * FROM contact_table")
-    suspend fun getAllContacts():List<Contact>
+    fun getAllContacts(): LiveData<List<Contact>>
 
     @Update
     suspend fun updateContact(contact:Contact)
 
-    @Delete
-    suspend fun deleteContact(contact:Contact)
+    @Query("DELETE FROM contact_table WHERE id = :id")
+    suspend fun deleteContact(id:Int)
 
     @Query("DELETE FROM contact_table")
     suspend fun deleteAllContacts()

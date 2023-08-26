@@ -6,8 +6,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import lnbti.charithgtp01.codetest1.ContactDao
-import lnbti.charithgtp01.codetest1.ContactDatabase
+import lnbti.charithgtp01.codetest1.db.ContactDao
+import lnbti.charithgtp01.codetest1.db.ContactDatabase
 import javax.inject.Singleton
 
 @Module

@@ -29,6 +29,12 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.CodeTest1.NoActionBar"/>
+
+        <activity
+            android:name=".ui.editcontact.EditContactActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.CodeTest1.NoActionBar"/>
     </application>
 
 </manifest>

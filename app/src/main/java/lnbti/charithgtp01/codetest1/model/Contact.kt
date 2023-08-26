@@ -6,7 +6,7 @@ import lnbti.charithgtp01.codetest1.R
 import java.util.Locale
 
 /**
- * Data class for Contact Object
+ * Room Data class for Contact Object
  */
 @Entity(tableName = "contact_table")
 data class Contact(

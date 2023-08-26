@@ -1,10 +1,14 @@
-package lnbti.charithgtp01.codetest1.ui.contacts
+package lnbti.charithgtp01.codetest1.repositories
 
-import lnbti.charithgtp01.codetest1.ContactDao
+import androidx.lifecycle.LiveData
+import lnbti.charithgtp01.codetest1.db.ContactDao
 import lnbti.charithgtp01.codetest1.model.Contact
 import javax.inject.Inject
 
 class ContactRepository @Inject constructor(private val contactDao: ContactDao) {
+
+    val allContacts: LiveData<List<Contact>> = contactDao.getAllContacts()
+
     suspend fun insertContact(contact: Contact) {
         contactDao.insertContact(contact)
     }
@@ -13,11 +17,7 @@ class ContactRepository @Inject constructor(private val contactDao: ContactDao) 
         contactDao.updateContact(contact)
     }
 
-    suspend fun deleteContact(contact: Contact) {
-        contactDao.deleteContact(contact)
-    }
-
-    suspend fun getAllContacts(): List<Contact> {
-        return contactDao.getAllContacts()
+    suspend fun deleteContact(id: Int) {
+        contactDao.deleteContact(id)
     }
 }

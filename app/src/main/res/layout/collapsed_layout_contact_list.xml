@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="callbacks"
+            type="lnbti.charithgtp01.codetest1.interfaces.ContactsCallback" />
         <variable
             name="item"
             type="lnbti.charithgtp01.codetest1.model.ContactItem" />
@@ -48,8 +50,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="8dp"
                 android:text="@{item.name}"
-                android:textColor="@color/black"
-                android:textSize="12sp"
+                style="@style/list_item_content_text_style"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/forwardArrowIcon"
                 app:layout_constraintStart_toEndOf="@+id/guideline"
