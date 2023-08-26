@@ -7,8 +7,10 @@
     <string name="address">Address</string>
     <string name="save">Save</string>
     <string name="add_contact">Add Contact</string>
+    <string name="edit_contact">Edit Contact</string>
     <string name="enter_name">Enter Name</string>
     <string name="enter_contact">Enter Contact No</string>
     <string name="enter_email">Enter Email</string>
     <string name="enter_address">Enter Address</string>
+    <string name="update">Update</string>
 </resources>

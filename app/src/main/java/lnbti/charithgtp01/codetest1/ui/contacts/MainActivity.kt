@@ -6,11 +6,14 @@ import androidx.activity.ComponentActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
+import lnbti.charithgtp01.codetest1.Constant.OBJECT_STRING
 import lnbti.charithgtp01.codetest1.R
 import lnbti.charithgtp01.codetest1.databinding.ActivityMainBinding
 import lnbti.charithgtp01.codetest1.interfaces.ContactsCallback
 import lnbti.charithgtp01.codetest1.model.ContactItem
+import lnbti.charithgtp01.codetest1.ui.editcontact.EditContactActivity
 import lnbti.charithgtp01.codetest1.ui.newcontact.NewContactActivity
 import lnbti.charithgtp01.codetest1.utils.Utils
 
@@ -20,6 +23,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: ContactsListViewModel
     private lateinit var contactsListAdapter: ContactsListAdapter
+    private val gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,11 +66,16 @@ class MainActivity : ComponentActivity() {
             contactsListAdapter =
                 ContactsListAdapter(profileItemList, object : ContactsCallback {
                     override fun onEditContactClick(contact: ContactItem) {
-                        Toast.makeText(this@MainActivity, contact.name, Toast.LENGTH_SHORT).show()
+                        val navigationPathMap = HashMap<String, String>()
+                        navigationPathMap[OBJECT_STRING] = gson.toJson(contact)
+                        Utils.navigateToAnotherActivityWithExtras(
+                            this@MainActivity,
+                            EditContactActivity::class.java, navigationPathMap
+                        )
                     }
 
                     override fun onDeleteContactClick(contact: ContactItem) {
-                      viewModel.deleteContact(contact.id)
+                        viewModel.deleteContact(contact.id)
                     }
                 })
             contactsListAdapter.submitList(profileItemList)

@@ -4,4 +4,5 @@ object Constant {
     const val VIEW_TYPE_EXPANDED = 2
     const val VIEW_TYPE_NORMAL = 1
     const val VIEW_TYPE_EMPTY = 0
+    const val OBJECT_STRING="object string"
 }
