@@ -1,6 +1,6 @@
-package lnbti.charithgtp01.codetest1.ui.contacts
+package lnbti.charithgtp01.codetest1.repositories
 
-import lnbti.charithgtp01.codetest1.ContactDao
+import lnbti.charithgtp01.codetest1.db.ContactDao
 import lnbti.charithgtp01.codetest1.model.Contact
 import javax.inject.Inject
 

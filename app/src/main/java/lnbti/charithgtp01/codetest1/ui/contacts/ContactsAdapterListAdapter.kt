@@ -1,9 +1,7 @@
 package lnbti.charithgtp01.codetest1.ui.contacts
 
-import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -12,14 +10,14 @@ import lnbti.charithgtp01.codetest1.BR
 import lnbti.charithgtp01.codetest1.Constant
 import lnbti.charithgtp01.codetest1.databinding.CollapsedLayoutContactListBinding
 import lnbti.charithgtp01.codetest1.databinding.ExpandedLayoutContactListBinding
-import lnbti.charithgtp01.codetest1.model.Contact
+import lnbti.charithgtp01.codetest1.interfaces.ContactsCallback
 import lnbti.charithgtp01.codetest1.model.ContactItem
 import javax.inject.Inject
 
 /**
  * Contacts List Adapter
  */
-class ContactsListAdapter @Inject constructor(private val dataList: List<ContactItem>) :
+class ContactsListAdapter @Inject constructor(private val dataList: List<ContactItem>, private val callbacks: ContactsCallback) :
     ListAdapter<ContactItem, ContactsListAdapter.ContactsAdapterListViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(
@@ -52,6 +50,7 @@ class ContactsListAdapter @Inject constructor(private val dataList: List<Contact
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ContactItem) {
             binding.setVariable(BR.item, item)
+            binding.setVariable(BR.callbacks, callbacks)
             binding.executePendingBindings()
         }
     }

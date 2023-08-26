@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import lnbti.charithgtp01.codetest1.ContactDatabase
 import lnbti.charithgtp01.codetest1.model.Contact
+import lnbti.charithgtp01.codetest1.repositories.ContactRepository
 import javax.inject.Inject
 
 /**

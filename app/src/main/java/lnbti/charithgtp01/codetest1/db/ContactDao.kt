@@ -1,4 +1,4 @@
-package lnbti.charithgtp01.codetest1
+package lnbti.charithgtp01.codetest1.db
 
 import androidx.room.Dao
 import androidx.room.Delete

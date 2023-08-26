@@ -1,17 +1,14 @@
 package lnbti.charithgtp01.codetest1.ui.contacts
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.util.Util
 import dagger.hilt.android.AndroidEntryPoint
-import lnbti.charithgtp01.codetest1.ContactDatabase
 import lnbti.charithgtp01.codetest1.R
 import lnbti.charithgtp01.codetest1.databinding.ActivityMainBinding
-import lnbti.charithgtp01.codetest1.model.Contact
+import lnbti.charithgtp01.codetest1.interfaces.ContactsCallback
 import lnbti.charithgtp01.codetest1.model.ContactItem
 import lnbti.charithgtp01.codetest1.ui.newcontact.NewContactActivity
 import lnbti.charithgtp01.codetest1.utils.Utils
@@ -69,7 +66,15 @@ class MainActivity : ComponentActivity() {
             }
             /* Initiate Adapter */
             contactsListAdapter =
-                ContactsListAdapter(profileItemList)
+                ContactsListAdapter(profileItemList, object : ContactsCallback {
+                    override fun onEditContactClick(contact: ContactItem) {
+                        Toast.makeText(this@MainActivity, contact.name, Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun onDeleteContactClick(contact: ContactItem) {
+                        Toast.makeText(this@MainActivity, contact.name, Toast.LENGTH_SHORT).show()
+                    }
+                })
             contactsListAdapter.submitList(profileItemList)
             /* Set Adapter to Recycle View */
             binding?.recyclerView.also { it2 ->

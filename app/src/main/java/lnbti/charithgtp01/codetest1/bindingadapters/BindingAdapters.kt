@@ -1,13 +1,11 @@
-package lnbti.charithgtp01.codetest1
+package lnbti.charithgtp01.codetest1.bindingadapters
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
-import android.view.View
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources.getColorStateList
-import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import lnbti.charithgtp01.codetest1.R
 import lnbti.charithgtp01.codetest1.model.ContactItem
 import java.util.Locale
 
