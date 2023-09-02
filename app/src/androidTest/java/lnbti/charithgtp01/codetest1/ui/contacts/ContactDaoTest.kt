@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import kotlinx.coroutines.runBlocking
+import lnbti.charithgtp01.codetest1.LiveDataTestUtil.getOrAwaitValue
 import lnbti.charithgtp01.codetest1.db.ContactDao
 import lnbti.charithgtp01.codetest1.db.ContactDatabase
 import lnbti.charithgtp01.codetest1.model.Contact

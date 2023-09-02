@@ -1,16 +1,14 @@
 package lnbti.charithgtp01.codetest1.ui.contacts
 
-import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import kotlinx.coroutines.runBlocking
+import lnbti.charithgtp01.codetest1.LiveDataTestUtil.getOrAwaitValue
 import lnbti.charithgtp01.codetest1.db.ContactDao
 import lnbti.charithgtp01.codetest1.db.ContactDatabase
 import lnbti.charithgtp01.codetest1.model.Contact
-import lnbti.charithgtp01.codetest1.repositories.ContactRepository
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
