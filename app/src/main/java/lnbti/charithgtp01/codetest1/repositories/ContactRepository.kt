@@ -5,9 +5,10 @@ import lnbti.charithgtp01.codetest1.db.ContactDao
 import lnbti.charithgtp01.codetest1.model.Contact
 import javax.inject.Inject
 
-class ContactRepository @Inject constructor(private val contactDao: ContactDao) {
-
-    val allContacts: LiveData<List<Contact>> = contactDao.getAllContacts()
+open class ContactRepository @Inject constructor(private val contactDao: ContactDao) {
+    fun getAllContacts(): LiveData<List<Contact>> {
+        return contactDao.getAllContacts()
+    }
 
     suspend fun insertContact(contact: Contact) {
         contactDao.insertContact(contact)
