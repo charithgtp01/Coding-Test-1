@@ -51,7 +51,7 @@ class ContactDaoTest {
     }
 
     @After
-    fun teatDown(){
+    fun tearDown(){
         contactDatabase.close()
     }
 

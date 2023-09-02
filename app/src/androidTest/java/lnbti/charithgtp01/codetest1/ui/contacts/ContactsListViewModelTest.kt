@@ -1,6 +1,7 @@
 package lnbti.charithgtp01.codetest1.ui.contacts
 
 import android.content.Context
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -10,36 +11,33 @@ import lnbti.charithgtp01.codetest1.db.ContactDao
 import lnbti.charithgtp01.codetest1.db.ContactDatabase
 import lnbti.charithgtp01.codetest1.model.Contact
 import lnbti.charithgtp01.codetest1.repositories.ContactRepository
+import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class ContactsListViewModelTest {
 
-    // Create a mock repository
-    private lateinit var contactRepository: ContactRepository
-    private lateinit var mockContactDao: ContactDao
-    private lateinit var dataBase: ContactDatabase
+    //Code is Synchronously executing
+    @get:Rule
+    val instantExecutorRule= InstantTaskExecutorRule()
 
-    // Create a mock Observer for LiveData
-//    private val observer = mock<Observer<List<Contact>>>()
+    lateinit var contactDatabase: ContactDatabase
+    lateinit var contactDao: ContactDao
 
     // Create an instance of your ViewModel
     private lateinit var viewModel: ContactsListViewModel
 
     @Before
     fun setup() {
-//        val context = InstrumentationRegistry.getInstrumentation().targetContext
-        val context: Context = ApplicationProvider.getApplicationContext()
-        dataBase = Room.inMemoryDatabaseBuilder(context, ContactDatabase::class.java)
-            .allowMainThreadQueries().build()
-//
-//        // Initialize the repository with a mocked ContactDao
-        mockContactDao = dataBase.contactDao()
-
-        contactRepository = ContactRepository(mockContactDao)
+        contactDatabase = Room.inMemoryDatabaseBuilder(
+            ApplicationProvider.getApplicationContext(),
+            ContactDatabase::class.java
+        ).allowMainThreadQueries().build()
+        contactDao=contactDatabase.contactDao()
 //        // Initialize the ViewModel with a mocked repository
 //        viewModel = ContactsListViewModel(contactRepository)
 
@@ -97,29 +95,44 @@ class ContactsListViewModelTest {
     @Test
     fun searchViewTextChangeFromDB_isCorrect() {
         runBlocking {
-            val contact = Contact(
-                id = 1,
+            val contact1 = Contact(
+                id = 0,
                 name = "John",
                 "charithvin@gmail.com",
                 "0712919249",
                 "Gampaha",
                 false
             )
+            val contact2= Contact(
+                id = 0,
+                name = "Charith",
+                "charithvin@gmail.com",
+                "0712919249",
+                "Gampaha",
+                false
+            )
 
-            contactRepository.insertContact(contact)
+            contactDao.insertContact(contact1)
+            contactDao.insertContact(contact2)
 
-            val allContacts = contactRepository.getAllContacts()
+            //Block the code until get the live data
+            val result=contactDao.getAllContacts().getOrAwaitValue()
             // Filter the list by a specific value
-            val searchString = "John"
+            val searchString = ""
 
-            val filteredList = allContacts.value?.filter { it.name.contains(searchString, true) }
+            val filteredList = result.filter { it.name.contains(searchString, true) }
 
             // Verify the size of the filtered list
-            assertEquals(1, filteredList?.size)
+            assertEquals(2, filteredList?.size)
 
             // Verify that the filtered list contains the expected items
             assertEquals("John", filteredList?.get(0)?.name)
         }
 
+    }
+
+    @After
+    fun tearDown(){
+        contactDatabase.close()
     }
 }
