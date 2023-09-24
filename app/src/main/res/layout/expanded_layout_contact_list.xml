@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="callbacks"
+            type="lnbti.charithgtp01.codetest1.interfaces.ContactsCallback" />
+
+        <variable
+            name="item"
+            type="lnbti.charithgtp01.codetest1.model.ContactItem" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/list_card_view_corner_radius"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:paddingTop="@dimen/content_margin_top"
+            android:paddingBottom="@dimen/content_margin_top">
+
+            <TextView
+                android:id="@+id/clientLetter"
+                android:layout_width="@dimen/contact_bg_size"
+                android:layout_height="@dimen/contact_bg_size"
+                android:gravity="center"
+                android:textSize="@dimen/contact_letter_text_size"
+                app:circularBg="@{item}"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nameView"
+                style="@style/list_item_content_text_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"
+                android:text="@{item.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/clientLetter"
+                app:layout_constraintEnd_toStartOf="@+id/forwardArrowIcon"
+                app:layout_constraintStart_toEndOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/clientLetter" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="79dp" />
+
+            <ImageView
+                android:id="@+id/forwardArrowIcon"
+                android:layout_width="@dimen/forward_arrow_size"
+                android:layout_height="@dimen/forward_arrow_size"
+                android:layout_marginEnd="@dimen/content_horizontal_margin"
+                android:rotation="270"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/next"
+                app:layout_constraintBottom_toBottomOf="@+id/nameView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/nameView" />
+
+            <TextView
+                android:id="@+id/email"
+                style="@style/list_item_sub_content_text_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"
+                android:text="@{item.email}"
+                app:layout_constraintStart_toStartOf="@id/clientLetter"
+                app:layout_constraintTop_toBottomOf="@id/contact" />
+
+
+            <TextView
+                android:id="@+id/address"
+                style="@style/list_item_sub_content_text_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"
+                android:text="@{item.address}"
+                app:layout_constraintStart_toStartOf="@id/clientLetter"
+                app:layout_constraintTop_toBottomOf="@id/email" />
+
+
+            <TextView
+                android:id="@+id/contact"
+                style="@style/list_item_sub_content_text_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"
+                android:text="@{item.contactNo}"
+                app:layout_constraintStart_toStartOf="@id/clientLetter"
+                app:layout_constraintTop_toBottomOf="@id/clientLetter" />
+
+            <!-- Edit button -->
+            <ImageView
+                android:id="@+id/editBtn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:onClick="@{() -> callbacks.onEditContactClick(item)}"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/pencil"
+                app:layout_constraintEnd_toEndOf="@id/forwardArrowIcon"
+                app:layout_constraintStart_toStartOf="@+id/forwardArrowIcon"
+                app:layout_constraintTop_toTopOf="@id/contact" />
+
+            <!-- Delete button -->
+            <ImageView
+                android:id="@+id/deleteBtn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/bin"
+                app:layout_constraintBottom_toBottomOf="@id/address"
+                app:layout_constraintEnd_toEndOf="@id/editBtn"
+                app:onClick="@{() -> callbacks.onDeleteContactClick(item)}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

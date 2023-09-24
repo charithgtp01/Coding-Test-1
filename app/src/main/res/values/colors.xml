@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
+    <color name="color_primary">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    //Profile Icon text colors
+    <color name="ALetter">#FFFF0000</color>
+    <color name="BLetter">#FF9000FF</color>
+    <color name="CLetter">#FF0025FF</color>
+    <color name="DLetter">#FF00BBFF</color>
+    <color name="ELetter">#FF00FFA5</color>
+    <color name="FLetter">#FF5DFF00</color>
+    <color name="GLetter">#FFFFE200</color>
+    <color name="HLetter">#FF000000</color>
+    <color name="ILetter">#FFA402A8</color>
+    <color name="JLetter">#FF0258A8</color>
+    <color name="KLetter">#FF02A858</color>
+    <color name="LLetter">#FF90A802</color>
+    <color name="MLetter">#FF02A88C</color>
+    <color name="NLetter">#FF6CA802</color>
+    <color name="OLetter">#FF7EB4D4</color>
+    <color name="PLetter">#FFB9E678</color>
+    <color name="QLetter">#FF78E6E1</color>
+    <color name="RLetter">#FFFF006D</color>
+    <color name="SLetter">#FF9EBC6D</color>
+    <color name="TLetter">#FFBC6DB9</color>
+    <color name="ULetter">#FFBC9F6D</color>
+    <color name="VLetter">#FF6DBCAD</color>
+    <color name="WLetter">#FFBC6DA4</color>
+    <color name="XLetter">#FFBF5900</color>
+    <color name="YLetter">#FFFC5757</color>
+    <color name="ZLetter">#FFB8B6A5</color>
+
+    //Profile bg colors
+
 </resources>
