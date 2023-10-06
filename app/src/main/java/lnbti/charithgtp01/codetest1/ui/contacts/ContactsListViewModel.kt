@@ -7,15 +7,14 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import lnbti.charithgtp01.codetest1.model.Contact
-import lnbti.charithgtp01.codetest1.repositories.ContactRepository
-import lnbti.charithgtp01.codetest1.ui.newcontact.NewContactFormState
+import lnbti.charithgtp01.codetest1.repositories.ContactRepositoryImpl
 import javax.inject.Inject
 
 /**
  * Contacts Page View Model
  */
 @HiltViewModel
-class ContactsListViewModel @Inject constructor(private val repository: ContactRepository) :
+class ContactsListViewModel @Inject constructor(private val repository: ContactRepositoryImpl) :
     ViewModel() {
 
     val allContacts: LiveData<List<Contact>> = repository.allContacts

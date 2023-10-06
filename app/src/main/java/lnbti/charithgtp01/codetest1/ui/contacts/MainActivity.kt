@@ -20,8 +20,8 @@ import lnbti.charithgtp01.codetest1.utils.Utils
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: ContactsListViewModel
+    lateinit var binding: ActivityMainBinding
+    lateinit var viewModel: ContactsListViewModel
     private lateinit var contactsListAdapter: ContactsListAdapter
     private val gson = Gson()
 
